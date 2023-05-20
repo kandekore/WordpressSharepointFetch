@@ -2,11 +2,11 @@
 function my_sharepoint_fetcher_menu() {
     add_menu_page(
         'My SharePoint Fetcher',
-        'My SharePoint Fetcher',
+        'Settings',
         'manage_options',
         'my-sharepoint-fetcher',
         'my_sharepoint_fetcher_settings_page',
-        'dashicons-admin-plugins',
+        'dashicons-text',
         30
     );
 
@@ -137,13 +137,13 @@ function my_sharepoint_images_options_page() {
     }
 
     // Display the folder ID input form
-    echo '<div class="wrap">';
-    echo '<h1>Import Folder from SharePoint</h1>';
-    echo '<form method="post">';
-    echo '<input type="text" name="folder_id" placeholder="Enter folder ID">';
-    submit_button('Import');
-    echo '</form>';
-    echo '<br><br>';
+    //echo '<div class="wrap">';
+    //echo '<h1>Import Folder from SharePoint</h1>';
+    //echo '<form method="post">';
+    //echo '<input type="text" name="folder_id" placeholder="Enter folder ID">';
+    //submit_button('Import');
+    //echo '</form>';
+    //echo '<br><br>';
     // Display the upload form
     echo '<h1>Upload Zip File to SharePoint Images Folder</h1>';
     echo '<form method="post" enctype="multipart/form-data">';
