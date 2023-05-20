@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: My SharePoint Fetcher
-Description: Fetches and displays content from SharePoint documents
-Version: 1.3.1
+Plugin Name: SharePoint Document Fetcher
+Description: Fetches and displays content from SharePoint html & plain text documents
+Version: 1.0.1
 Author: Darren Kandekore
 */
 
