@@ -17,7 +17,7 @@ A plugin that fetches content from a Sharepoint site and enables the user to add
 
 - The Motivation for building this application was I needed a method to display content from complex word documents, keeping index links and images.
 - The application was built to provide a method of importing content to WordPress sites from SharePoint
-- It solves the problem of having to rebuild documents to display on a website, it also presents an oportunity for end users to use SharePoint as a content managment system.
+- It solves the problem of having to rebuild documents to display on a website, it also presents an opportunity for end users to use SharePoint as a content managment system.
 - Through the process of building this application I learned how to query the Microsoft Graph API to get drive and file ID's
 
 ## Usage
@@ -25,6 +25,10 @@ A plugin that fetches content from a Sharepoint site and enables the user to add
 You can download a copy of the plugin from here [this link.](https://wpsharepointfetch.wordpresswizard.net/)
 
 • You create the document in Word
+• Download the .docx file and save as a .html document
+• Upload the the .html to share point
+• Zip and upload the images folder to the plugin
+• Add a shortcode on the page of where you want to display the doc
 
 ## License
 
