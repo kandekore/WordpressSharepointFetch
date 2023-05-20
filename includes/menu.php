@@ -1,14 +1,17 @@
 <?php
 function my_sharepoint_fetcher_menu() {
-    add_options_page(
-        'My SharePoint Fetcher Settings',
+    add_menu_page(
+        'My SharePoint Fetcher',
         'My SharePoint Fetcher',
         'manage_options',
         'my-sharepoint-fetcher',
-        'my_sharepoint_fetcher_settings_page'
+        'my_sharepoint_fetcher_settings_page',
+        'dashicons-admin-plugins',
+        30
     );
 
-    add_options_page(
+    add_submenu_page(
+        'my-sharepoint-fetcher',
         'Upload SharePoint Images',
         'Upload SharePoint Images',
         'manage_options',
@@ -16,6 +19,7 @@ function my_sharepoint_fetcher_menu() {
         'my_sharepoint_images_options_page'
     );
 }
+
 
 // Create the settings page
 function my_sharepoint_fetcher_settings_page() {
