@@ -1,6 +1,6 @@
 ![badmath](https://img.shields.io/badge/license-GPL-blue)
 
-# SharePoint Document Fetcher
+# WordPress SharePoint Document Fetcher
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@
 
 ## Description
 
-A plugin that fetches content from a Sharepoint site and enables the user to add it to WordPress using a shortcode, a workaround for displaying Word Documents as HTML within WordPress pages, but can potentially any kind of document can be imported.
+A plugin that fetches content from a Sharepoint site and enables the user to add it to WordPress using a shortcode, a workaround for displaying Word Documents as HTML within WordPress pages, but potentially any kind of document can be imported.
 
 - The Motivation for building this application was I needed a method to display content from complex word documents, keeping index links and images.
 - The application was built to provide a method of importing content to WordPress sites from SharePoint
