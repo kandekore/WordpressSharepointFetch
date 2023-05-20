@@ -127,6 +127,10 @@ function my_sharepoint_images_options_page() {
             if ($zip->open($filename) === TRUE) {
                 $zip->extractTo($upload_dir);
                 $zip->close();
+                // Change the permissions of the extracted directory and its contents
+                chmod($upload_dir, 0755);
+                // Change permissions of all files in the directory
+                array_map('chmod', glob("$upload_dir/*"), array_fill(0, count(glob("$upload_dir/*")), 0755));
                 echo '<div class="updated"><p>Zip file uploaded and extracted successfully.</p></div>';
             } else {
                 echo '<div class="error"><p>Failed to extract zip file.</p></div>';
@@ -136,14 +140,6 @@ function my_sharepoint_images_options_page() {
         }
     }
 
-    // Display the folder ID input form
-    //echo '<div class="wrap">';
-    //echo '<h1>Import Folder from SharePoint</h1>';
-    //echo '<form method="post">';
-    //echo '<input type="text" name="folder_id" placeholder="Enter folder ID">';
-    //submit_button('Import');
-    //echo '</form>';
-    //echo '<br><br>';
     // Display the upload form
     echo '<h1>Upload Zip File to SharePoint Images Folder</h1>';
     echo '<form method="post" enctype="multipart/form-data">';
@@ -151,4 +147,13 @@ function my_sharepoint_images_options_page() {
     submit_button('Upload');
     echo '</form>';
     echo '</div>';
+       // Display the folder ID input form
+//echo '<div class="wrap">';
+//echo '<h1>Import Folder from SharePoint</h1>';
+//echo '<form method="post">';
+//echo '<input type="text" name="folder_id" placeholder="Enter folder ID">';
+//submit_button('Import');
+//echo '</form>';
+//echo '<br><br>';
 }
+
