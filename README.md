@@ -25,9 +25,13 @@ A plugin that fetches content from a Sharepoint site and enables the user to add
 You can download a copy of the plugin from here [this link.](https://wpsharepointfetch.wordpresswizard.net/)
 
 • You create the document in Word
+
 • Download the .docx file and save as a .html document
+
 • Upload the the .html to share point
+
 • Zip and upload the images folder to the plugin
+
 • Add a shortcode on the page of where you want to display the doc
 
 ## License
