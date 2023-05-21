@@ -33,6 +33,8 @@ Set API Permissions in Azure AD
 
 Add credentials to plugin settings page
 
+![credentials](https://wpsharepointfetch.wordpresswizard.net/images/settings.png)
+
 ## Usage
 
 You can download a copy of the plugin from here [this link.](https://wpsharepointfetch.wordpresswizard.net/)
