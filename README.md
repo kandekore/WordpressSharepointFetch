@@ -39,15 +39,17 @@ Add credentials to plugin settings page
 
 You can download a copy of the plugin from here [this link.](https://wpsharepointfetch.wordpresswizard.net/)
 
-You create the document in Word
+You create the document in Word either locally or on SharePoint
 
-Download the .docx file and save as a .html document
+If the Word file is created on Sharepoint Download the .docx file. Save as a .html document in your desktop version of Word.
 
-Upload the the .html to SharePoint
+Upload the the .html to your SharePoint site
 
 Zip and upload the images folder to the plugin
 
 Add a shortcode on the page of where you want to display the doc
+
+![image upload](https://wpsharepointfetch.wordpresswizard.net/images/imgupload.png)
 
 ## Testing
 
