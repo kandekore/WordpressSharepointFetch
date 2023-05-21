@@ -29,7 +29,7 @@ Register an App in Azure AD
 
 Create a Client Secret in Azure AD
 
-Set API Permissions in Azure AD
+Set API Permissions Sites.Read.All & Files.Read.All in Azure AD Microsoft Graph API. These permissions need to be consented to by an administrator during the Azure App Registration process.
 
 Add credentials to plugin settings page
 
@@ -37,7 +37,7 @@ Add credentials to plugin settings page
 
 ## Usage
 
-You can download a copy of the plugin from here [this link.](https://wpsharepointfetch.wordpresswizard.net/)
+You can download a copy of the plugin using [this link.](https://wpsharepointfetch.wordpresswizard.net/)
 
 You create the document in Word either locally or on SharePoint
 
