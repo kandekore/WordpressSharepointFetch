@@ -31,9 +31,9 @@ function my_sharepoint_fetcher_fetch_content($atts) {
 
     // Create a new DOMDocument instance and load the HTML content
     $doc = new DOMDocument();
-libxml_use_internal_errors(true);  // Enable user error handling
-$doc->loadHTML(mb_convert_encoding($body, 'HTML-ENTITIES', 'UTF-8'));
-libxml_clear_errors();  // Clear any errors
+    libxml_use_internal_errors(true);  // Enable user error handling
+    $doc->loadHTML(mb_convert_encoding($body, 'HTML-ENTITIES', 'UTF-8'));
+    libxml_clear_errors();  // Clear any errors
 
     // Create a new DOMXPath instance and query all <img> elements
     $xpath = new DOMXPath($doc);
@@ -46,25 +46,21 @@ libxml_clear_errors();  // Clear any errors
     foreach ($img_elements as $img) {
         $img_src = $img->getAttribute('src');
         $img_path_parts = pathinfo($img_src);
-        
-        // Extract the directory name (your variable folder name)
-        $folder_name = $img_path_parts['dirname'];
-        
-        // Remove any unwanted elements (like '.') from the folder name if needed
-        $folder_name = ltrim($folder_name, '.');
-        
+
+        // Modify the file name to blank out the version number if it exists
+        $img_filename = preg_replace('/\(\d+\)/', '', $img_path_parts['filename']);
+
         // Build the new 'src' path by appending the folder name and the basename to the base path
-        $img_new_src = $image_base_path . $folder_name . '/' . $img_path_parts['basename'];
-        
+        $img_new_src = $image_base_path . $img_path_parts['dirname'] . '/' . $img_filename . '.' . $img_path_parts['extension'];
+
         $img->setAttribute('src', $img_new_src);
     }
 
     // Save the updated HTML content
     $body_updated = $doc->saveHTML();
-    
-      // Handle black diamond character
-   // $body_updated = mb_convert_encoding($body_updated, 'UTF-8', 'UTF-8');
-$body_updated = iconv("UTF-8", "UTF-8//IGNORE", $body_updated);
+
+    // Handle black diamond character
+    $body_updated = iconv("UTF-8", "UTF-8//IGNORE", $body_updated);
 
     return $body_updated;
 }

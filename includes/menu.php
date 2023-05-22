@@ -27,45 +27,38 @@ function my_sharepoint_fetcher_settings_page() {
     if (!current_user_can('manage_options')) {
         return;
     }
+   // Process the form submission if the form has been submitted
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    process_settings_form();
+}
 
-    // Save settings if form is submitted
-    if (isset($_POST['tenant_id']) && isset($_POST['client_id']) && isset($_POST['client_secret']) && isset($_POST['hostname']) && isset($_POST['site_path'])) {
-        update_option('my_sharepoint_fetcher_tenant_id', sanitize_text_field($_POST['tenant_id']));
-        update_option('my_sharepoint_fetcher_client_id', sanitize_text_field($_POST['client_id']));
-        update_option('my_sharepoint_fetcher_client_secret', sanitize_text_field($_POST['client_secret']));
-        update_option('my_sharepoint_fetcher_hostname', sanitize_text_field($_POST['hostname']));
-        update_option('my_sharepoint_fetcher_site_path', sanitize_text_field($_POST['site_path']));
-        echo '<div class="updated"><p>Settings saved.</p></div>';
-    }
+// Fetch current settings
+$tenantId = get_option('my_sharepoint_fetcher_tenant_id', '');
+$clientId = get_option('my_sharepoint_fetcher_client_id', '');
+$clientSecret = get_decrypted_client_secret();
+$hostname = get_option('my_sharepoint_fetcher_hostname', '');
+$sitePath = get_option('my_sharepoint_fetcher_site_path', '');
 
-    // Fetch current settings
-    $tenantId = get_option('my_sharepoint_fetcher_tenant_id', '');
-    $clientId = get_option('my_sharepoint_fetcher_client_id', '');
-    $clientSecret = get_option('my_sharepoint_fetcher_client_secret', '');
-    $hostname = get_option('my_sharepoint_fetcher_hostname', '');
-    $sitePath = get_option('my_sharepoint_fetcher_site_path', '');
-    
-        // Fetch site ID and drive ID
-    $siteId = my_sharepoint_fetcher_get_site_id();
-    $driveId = my_sharepoint_fetcher_get_drive_id($siteId);
+// Fetch site ID and drive ID
+$siteId = my_sharepoint_fetcher_get_site_id();
+$driveId = my_sharepoint_fetcher_get_drive_id($siteId);
 
 
-    // Display the settings form
-    echo '<div class="wrap">';
-    echo '<h1>My SharePoint Fetcher Settings</h1>';
-    echo '<form method="post">';
-    echo '<table class="form-table">';
-    echo '<tr><th scope="row">Tenant ID</th><td><input type="text" name="tenant_id" value="' . esc_attr($tenantId) . '"></td></tr>';
-    echo '<tr><th scope="row">Client ID</th><td><input type="text" name="client_id" value="' . esc_attr($clientId) . '"></td></tr>';
-    echo '<tr><th scope="row">Client Secret</th><td><input type="text" name="client_secret" value="' . esc_attr($clientSecret) . '"></td></tr>';
-    echo '<tr><th scope="row">Hostname</th><td><input type="text" name="hostname" value="' . esc_attr($hostname) . '"></td></tr>';
-    echo '<tr><th scope="row">Site Path</th><td><input type="text" name="site_path" value="' . esc_attr($sitePath) . '"></td></tr>';
-    echo '<tr><th scope="row">Site ID</th><td><input type="text" name="site_id" value="' . esc_attr($siteId) . '" disabled></td></tr>';
-    echo '<tr><th scope="row">Drive ID</th><td><input type="text" name="drive_id" value="' . esc_attr($driveId) . '" disabled></td></tr>';
-    echo '</table>';
-    submit_button();
-    echo '</form>';
-    echo '</div>';
+
+   // Display the settings form
+   echo '<div class="wrap">';
+   echo '<h1>My SharePoint Fetcher Settings</h1>';
+   echo '<form method="post">';
+   echo '<table class="form-table">';
+   echo '<tr><th scope="row">Tenant ID</th><td><input type="text" name="tenant_id" value="' . esc_attr($tenantId) . '"></td></tr>';
+   echo '<tr><th scope="row">Client ID</th><td><input type="text" name="client_id" value="' . esc_attr($clientId) . '"></td></tr>';
+   echo '<tr style="display: none;"><th scope="row">Client Secret</th><td><input type="password" name="client_secret" value=""></td></tr>';
+   echo '<tr><th scope="row">Hostname</th><td><input type="text" name="hostname" value="' . esc_attr($hostname) . '"></td></tr>';
+   echo '<tr><th scope="row">Site Path</th><td><input type="text" name="site_path" value="' . esc_attr($sitePath) . '"></td></tr>';
+   echo '</table>';
+   submit_button();
+   echo '</form>';
+   echo '</div>';
 
     // List files in drive
     $files = my_sharepoint_fetcher_list_files($driveId);
@@ -79,6 +72,16 @@ function my_sharepoint_fetcher_settings_page() {
         }
 
         echo '</ul>';
+    }
+
+    // Process the form submission
+function process_settings_form() {
+    if (isset($_POST['tenant_id']) && isset($_POST['client_id']) && isset($_POST['hostname']) && isset($_POST['site_path'])) {
+        update_option('my_sharepoint_fetcher_tenant_id', sanitize_text_field($_POST['tenant_id']));
+        update_option('my_sharepoint_fetcher_client_id', sanitize_text_field($_POST['client_id']));
+        update_option('my_sharepoint_fetcher_hostname', sanitize_text_field($_POST['hostname']));
+        update_option('my_sharepoint_fetcher_site_path', sanitize_text_field($_POST['site_path']));
+        echo '<div class="updated"><p>Settings saved.</p></div>';
     }
      
 
