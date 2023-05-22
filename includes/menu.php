@@ -60,19 +60,27 @@ $driveId = my_sharepoint_fetcher_get_drive_id($siteId);
    echo '</form>';
    echo '</div>';
 
-    // List files in drive
-    $files = my_sharepoint_fetcher_list_files($driveId);
+  // List files in drive if settings are present
+  if ($clientId && $tenantId && $hostname && $sitePath) {
+    $driveId = my_sharepoint_fetcher_get_drive_id($siteId);
 
-    if ($files) {
-        echo '<h2>Files in Drive</h2>';
-        echo '<ul>';
+    // Only list files if driveId is available
+    if ($driveId) {
+        $files = my_sharepoint_fetcher_list_files($driveId);
 
-        foreach ($files as $file) {
-            echo '<li>' . esc_html($file->name) . ' - [sharepoint_content id="' . esc_html($file->id) . '" ]</li>';
+        if ($files) {
+            echo '<h2>Files in Drive</h2>';
+            echo '<ul>';
+
+            foreach ($files as $file) {
+                echo '<li>' . esc_html($file->name) . ' - [sharepoint_content id="' . esc_html($file->id) . '" ]</li>';
+            }
+
+            echo '</ul>';
         }
-
-        echo '</ul>';
     }
+}
+}
 
     // Process the form submission
 function process_settings_form() {
@@ -85,6 +93,7 @@ function process_settings_form() {
     }
      
 
+}
 }
 function my_sharepoint_images_options_page() {
     // Check user capabilities
@@ -160,3 +169,35 @@ function my_sharepoint_images_options_page() {
 //echo '<br><br>';
 }
 
+function process_settings_form() {
+    // Check if all necessary POST fields are set
+    $required_fields = ['tenant_id', 'client_id', 'client_secret', 'hostname', 'site_path'];
+    foreach ($required_fields as $field) {
+        if (!isset($_POST[$field])) {
+            return;
+        }
+    }
+
+    // Encryption key (Please make sure to store this securely and do not expose it publicly)
+    $encryption_key = 'your_encryption_key_here'; // Ideally from a secure source or environment variable
+
+    // Save the settings
+    foreach ($required_fields as $field) {
+        $value = sanitize_text_field($_POST[$field]);
+        
+        // If this is a sensitive field, encrypt the value
+        if ($field === 'client_secret') {
+            $cipher = "aes-128-gcm";
+            if (in_array($cipher, openssl_get_cipher_methods()))
+            {
+                $ivlen = openssl_cipher_iv_length($cipher);
+                $iv = openssl_random_pseudo_bytes($ivlen);
+                $value = openssl_encrypt($value, $cipher, $encryption_key, $options=0, $iv, $tag);
+            }
+        }
+
+        update_option('my_sharepoint_fetcher_' . $field, $value);
+    }
+
+    echo '<div class="updated"><p>Settings saved.</p></div>';
+}

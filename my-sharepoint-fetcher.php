@@ -2,7 +2,7 @@
 /*
 Plugin Name: SharePoint Document Fetcher
 Description: Fetches and displays content from SharePoint html & plain text documents
-Version: 1.0.1
+Version: 1.0.2
 Author: Darren Kandekore
 */
 
