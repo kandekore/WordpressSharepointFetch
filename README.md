@@ -13,15 +13,19 @@
 
 ## Description
 
-A plugin that fetches content from a Sharepoint site and enables the user to add it to WordPress using a shortcode, a workaround for displaying Word Documents as HTML within WordPress pages, but potentially any kind of document can be imported.
+A user may want to display the content of a Word Document on a webpage, conversion of .docx files to HTML is a complex task and may drain server resources if performed on demand. 
 
-- The Motivation for building this application was I needed a method to display content from complex word documents on a WordPress page, keeping index links and images.
+This plugin is a workaround that fetches plain text or html content from a Sharepoint site and enables the user to add it to a WordPress using a shortcode. The user downloads and saves the word document as html and uploads to a SharePoint Site shared document folder allowing the user to continue to construct and edit the content in Word.
+
+- The Motivation for building this application was I needed a method to display content from complex word documents on a WordPress page, keeping index links, tables and images intact.
 - The application was built to provide a method of importing content to WordPress sites from SharePoint
 - It solves the problem of having to rebuild documents to display on a website, it also presents an opportunity for end users to use SharePoint as a content managment system.
 - The plugin presents future development opportunities of other ways to handle, display or distribute SharePoint documents
 - Through the process of building this application I learned how to query the Microsoft Graph API to get drive and file ID's
 
 ## Installation
+
+Download a copy of the plugin using [this link.](https://wpsharepointfetch.wordpresswizard.net/)
 
 Upload and install the plugin to WordPress
 
@@ -37,7 +41,6 @@ Add credentials to plugin settings page
 
 ## Usage
 
-You can download a copy of the plugin using [this link.](https://wpsharepointfetch.wordpresswizard.net/)
 
 You create the document in Word either locally or on SharePoint
 
